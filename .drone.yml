@@ -1,0 +1,17 @@
+kind: pipeline
+name: default
+
+steps:
+- name: appTest
+  image: node:lts-alpine
+  commands:
+  - yarn --ignore-engines 
+  - yarn test:app
+
+steps:
+- name: usersTest
+  image: node
+  commands:
+  - yarn --ignore-engines
+  - yarn test:user
+  - npm test
