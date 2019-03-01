@@ -2,16 +2,36 @@ kind: pipeline
 name: default
 
 steps:
+- name: runMongo
+  image: mongo
+  commands:
+  - sleep 10
+  - mongo --host mongo --eval "db.version()"
+
 - name: appTest
   image: node:lts-alpine
+  environment:
+    - MONGOURI=mongodb://mongo:27017/yourapp
+    - MONGOTESTURI=mongodb://mongo:27017/test-app
   commands:
   - yarn --ignore-engines 
+  - cp .env.example .env
   - yarn test:app
 
-steps:
 - name: usersTest
-  image: node
+  image: node:lts-alpine
+  environment:
+    - MONGOURI=mongodb://mongo:27017/yourapp
+    - MONGOTESTURI=mongodb://mongo:27017/test-app
   commands:
   - yarn --ignore-engines
+  - cp .env.example .env
   - yarn test:user
   - npm test
+
+services:
+- name: mongo
+  image: mongo
+  command: [ --smallfiles ]
+  ports:
+  - 27017
