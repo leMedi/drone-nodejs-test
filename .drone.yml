@@ -11,8 +11,8 @@ steps:
 - name: appTest
   image: node:lts-alpine
   environment:
-    - MONGOURI:mongodb://mongo:27017/yourapp
-    - MONGOTESTURI:mongodb://mongo:27017/test-app
+    - MONGOURI: mongodb://mongo:27017/yourapp
+    - MONGOTESTURI: mongodb://mongo:27017/test-app
   commands:
   - yarn --ignore-engines 
   - cp .env.example .env
@@ -21,8 +21,8 @@ steps:
 - name: usersTest
   image: node:lts-alpine
   environment:
-    - MONGOURI:mongodb://mongo:27017/yourapp
-    - MONGOTESTURI:mongodb://mongo:27017/test-app
+    - MONGOURI: mongodb://mongo:27017/yourapp
+    - MONGOTESTURI: mongodb://mongo:27017/test-app
   commands:
   - yarn --ignore-engines
   - cp .env.example .env
