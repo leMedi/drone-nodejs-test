@@ -21,6 +21,7 @@ describe('Users', () => {
       .post('/api/auth/register')
       .send(user)
       .end((err, res) => {
+        console.log(res)
         res.should.have.status(201)
         res.body.should.have.property('id')
         res.body.should.have.property('createdAt')
