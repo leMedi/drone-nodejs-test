@@ -6,14 +6,15 @@ const chai = require('chai')
 const chaiHttp = require('chai-http')
 const app = require('../src/index').app
 const should = chai.should()
-
+const uniqid = require('uniqid');
 chai.use(chaiHttp)
 
 describe('Users', () => {
+  const id = uniqid('user')
   let user = {
-    email: 'mehdi13@elhaij.com',
-    password: 'mehdi@elhaij.com',
-    name: 'mehdi@elhaij.com',
+    email: id + '@test.com',
+    password: 'helloWorld',
+    name: 'testuser-' + id,
   }
   it('Create User', (done) => {
     chai
